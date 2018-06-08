@@ -1,0 +1,33 @@
+const Discord = require("discord.js");
+const png = require("fs");
+function random(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+ }
+ //////////////////////////////////////////////////////////////
+module.exports.run = async (bot, message, args) => {
+ png.readdir("./boop/", (err, files) =>{
+
+    if(err) console.error(err);
+    var boop = "./boop/";
+
+let target = message.mentions.users.first() || message.author;
+
+    if (!message.mentions.users.first() || target.id == message.author.id){
+        message.channel.sendFile("./random/self_Boop.png")
+        return message.channel.sendMessage("pfft");}else{
+			     message.channel.send({files:[
+    	{
+    		attachment: boop+files[random(files.length)],
+    		name: "Boop.png"
+    	}
+    	]});
+          //  message.channel.sendFile(boop+files[random(files.length)]);
+        }
+});
+}
+// ///////////////////////////////////////////////////////////////////////
+
+
+module.exports.help = {
+    name: "boop",
+}
